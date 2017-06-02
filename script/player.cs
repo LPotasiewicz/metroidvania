@@ -9,6 +9,8 @@ public class player : MonoBehaviour {
 	public float speed;
 	public float jumpHeight;
 	public bool grounded;
+	public GameObject attackObject;
+	public GameObject attackSpawn;
 
 	private Vector2 movement;
 	private bool isRunning;
@@ -21,9 +23,10 @@ public class player : MonoBehaviour {
 
 	
 	// Update is called once per frame
-	void FixedUpdate () {
+	void Update () {
 		movement = new Vector2 (rb2d.velocity.x, rb2d.velocity.y);
 		Vector2 direction = new Vector2 (gameObject.transform.localScale.x, 1);
+
 
 		isRunning = false;
 		// WALKING
@@ -46,15 +49,21 @@ public class player : MonoBehaviour {
 			movement.y = jumpHeight;
 		}
 
+		// ATTACKING
+		if (Input.GetKeyDown (KeyCode.G)) {
+			GameObject attack = Instantiate (attackObject, attackSpawn.transform.position, Quaternion.identity) as GameObject;
+			//Destroy (attack, 0.1f);
+		}
+
 		// ASSIGN INGAME VARIABLES
 		rb2d.velocity = movement;
 		gameObject.transform.localScale = direction;
-	}
 
-	void Update () {
 		// ANIMATION VARABLES
 		anim.SetBool ("isRunning", isRunning);
 		anim.SetBool ("grounded", grounded);
 		anim.SetFloat ("yVelocity", movement.y);
+
+	
 	}
 }
