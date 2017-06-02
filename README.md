@@ -1,3 +1,6 @@
-# metroidvania
+Hey This is our Metroidvania project
 
-Spuck it spurdsle
+Luke
+Theron
+Patrick
+Willem
