@@ -9,7 +9,7 @@ public class TargetDumbass : MonoBehaviour {
 	void OnTriggerStay2D (Collider2D other){
 		if (other.gameObject.tag == "attack") {
 			health-= other.gameObject.GetComponent<attack> ().value;
-			Debug.Log ("Ow" + health);
+			Debug.Log ("Ow " + health);
 			Destroy (other.gameObject);
 		}
 	}

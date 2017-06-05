@@ -14,6 +14,7 @@ public class player : MonoBehaviour {
 
 	private Vector2 movement;
 	private bool isRunning;
+	private bool canAttack = true;
 
 	// Use this for initialization
 	void Start () {
@@ -50,9 +51,10 @@ public class player : MonoBehaviour {
 		}
 
 		// ATTACKING
-		if (Input.GetKeyDown (KeyCode.G)) {
+		if (Input.GetKeyDown (KeyCode.Space) && canAttack) {
 			GameObject attack = Instantiate (attackObject, attackSpawn.transform.position, Quaternion.identity) as GameObject;
-			//Destroy (attack, 0.1f);
+			Destroy (attack, 0.1f);
+			StartCoroutine (attackDelay ());
 		}
 
 		// ASSIGN INGAME VARIABLES
@@ -65,5 +67,11 @@ public class player : MonoBehaviour {
 		anim.SetFloat ("yVelocity", movement.y);
 
 	
+	}
+
+	IEnumerator attackDelay(){
+		canAttack = false;
+		yield return new WaitForSeconds(0.5f);
+		canAttack = true;
 	}
 }
